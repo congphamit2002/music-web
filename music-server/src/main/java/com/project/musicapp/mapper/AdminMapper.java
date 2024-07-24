@@ -1,9 +1,9 @@
-package mapper;
+package com.project.musicapp.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import model.domain.Admin;
-import org.springframework.stereotype.Repository;
+import com.project.musicapp.model.domain.Admin;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface AdminMapper extends BaseMapper<Admin> {
 }

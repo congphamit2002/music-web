@@ -1,9 +1,9 @@
-package mapper;
+package com.project.musicapp.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import model.domain.SongList;
-import org.springframework.stereotype.Repository;
+import com.project.musicapp.model.domain.SongList;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface SongListMapper extends BaseMapper<SongList> {
 }
