@@ -1,4 +1,4 @@
-package model.domain;
+package com.project.musicapp.model.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
