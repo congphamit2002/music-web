@@ -1,17 +1,16 @@
-package com.project.musicapp.model.domain;
+package com.project.musicapp.model.request;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.util.Date;
 
-@TableName(value = "user")
 @Data
-public class User {
-    @TableId(type = IdType.AUTO)
-    private Integer id;
-
+public class UserRequest {
     private String username;
+
+    private String oldPassword;
 
     private String password;
 
@@ -27,9 +26,7 @@ public class User {
 
     private String avator;
 
-    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 }
