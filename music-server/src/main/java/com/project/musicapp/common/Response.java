@@ -45,4 +45,11 @@ public class Response {
         response.setType(Constants.BAD_REQUEST);
         return response;
     }
+
+    public static Response notFound(String message) {
+        Response response = error(message);
+        response.setCode(404);
+        response.setType(Constants.NOT_FOUND);
+        return response;
+    }
 }

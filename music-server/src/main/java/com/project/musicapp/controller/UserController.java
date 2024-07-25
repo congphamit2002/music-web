@@ -4,10 +4,7 @@ import com.project.musicapp.common.Response;
 import com.project.musicapp.model.request.UserRequest;
 import com.project.musicapp.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -16,8 +13,13 @@ public class UserController {
     private final UserService userService;
 
     // Sign-up account
-    @PostMapping("/add")
+    @PostMapping("")
     public Response addUser(@RequestBody UserRequest userRequest) {
         return userService.addUser(userRequest);
+    }
+
+    @PutMapping("/{id}")
+    public Response updateUser(@PathVariable Integer id, @RequestBody UserRequest userRequest) {
+        return userService.updateUser(id, userRequest);
     }
 }
