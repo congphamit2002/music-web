@@ -18,6 +18,9 @@ public class UserController {
         return userService.addUser(userRequest);
     }
 
+    /*
+        Handle get id from access token, not access id in param
+     */
     @PutMapping("/{id}")
     public Response updateUser(@PathVariable Integer id, @RequestBody UserRequest userRequest) {
         return userService.updateUser(id, userRequest);
