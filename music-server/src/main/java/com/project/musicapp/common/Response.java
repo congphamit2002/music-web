@@ -41,7 +41,8 @@ public class Response {
 
     public static Response warning(String message) {
         Response response = error(message);
-        response.setType(Constants.WARNING);
+        response.setCode(400);
+        response.setType(Constants.BAD_REQUEST);
         return response;
     }
 }
