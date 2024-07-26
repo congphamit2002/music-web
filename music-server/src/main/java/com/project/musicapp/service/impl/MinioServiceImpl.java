@@ -32,23 +32,21 @@ public class MinioServiceImpl implements MinioService {
 
     @Override
     public String uploadImage(MultipartFile file) {
-        return "";
+        return upload(file, "/singer/");
     }
 
     @Override
     public String uploadSongListImage(MultipartFile file) {
-        return "";
+        return upload(file, "/songList/");
     }
 
     @Override
     public String uploadSongImage(MultipartFile file) {
-        return "";
+        return upload(file, "/singer/song/");
     }
 
     @Override
-    public String uploadAvatar(MultipartFile file) {
-        return "";
-    }
+    public String uploadAvatar(MultipartFile file) { return upload(file, "/avatorImage/"); }
 
     @Override
     public String upload(MultipartFile file, String prefixFileName) {
