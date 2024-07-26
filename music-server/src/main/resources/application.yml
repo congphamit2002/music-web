@@ -1,15 +1,29 @@
 spring:
   application:
     name: music-app
+  # config database properties
   datasource:
     url: jdbc:mysql://localhost:3307/music-app?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: admin
+  # limit byte size uploading
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
 
+# config mybatis
 mybatis:
   type-aliases-package: com.project.musicapp.model.domain
   mapper-locations: classpath:mapper/*.xml
 
+# config mybatis-plus
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+minio:
+  endpoint: http://localhost:9000
+  access-key: root
+  secret-key: 12345678
+  bucket-name: music-web
