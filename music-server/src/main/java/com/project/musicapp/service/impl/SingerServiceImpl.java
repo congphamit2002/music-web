@@ -35,7 +35,6 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
             } else {
                 return Response.error("Insert singer failed");
             }
-
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
