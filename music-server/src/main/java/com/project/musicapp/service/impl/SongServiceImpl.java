@@ -150,7 +150,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
         try {
             return Response.success(null, songMapper.selectList(null));
         } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
+            return Response.error(e.getMessage());
         }
     }
 
@@ -161,7 +161,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
         try {
             return Response.success(null, songMapper.selectList(queryWrapper));
         } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
+            return Response.error(e.getMessage());
         }
     }
 
