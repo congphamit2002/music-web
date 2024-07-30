@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -109,10 +110,22 @@ public class MinioServiceImpl implements MinioService {
                 return "Error deleting object " + error.objectName() + "; " + error.message();
             }
             return "File removed successfully!";
-        }
-        catch (MinioException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
+        } catch (MinioException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
             return "Error uploading file to MinIO: " + e.getMessage();
         } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public InputStream downloadFile(String fileName) {
+        try {
+            return minioClient.getObject(
+                    GetObjectArgs.builder()
+                            .bucket(bucketName)
+                            .object(fileName).build()
+            );
+        } catch (MinioException | IOException | NoSuchAlgorithmException | InvalidKeyException | RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
