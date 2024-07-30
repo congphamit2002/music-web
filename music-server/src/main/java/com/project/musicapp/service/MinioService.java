@@ -2,6 +2,7 @@ package com.project.musicapp.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.List;
 
 public interface MinioService {
@@ -13,4 +14,5 @@ public interface MinioService {
     String upload(MultipartFile file, String prefixFileName);
     String removeFile(String fileName);
     String removeMultipleFile(List<String> fileName);
+    InputStream downloadFile(String fileName);
 }
