@@ -8,8 +8,6 @@ import java.util.Date;
 
 @Data
 public class UserRequest {
-    private Integer id;
-
     private String username;
 
     private String oldPassword;

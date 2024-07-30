@@ -7,4 +7,9 @@ public class Constants {
     public static final String NOT_FOUND = "not found";
 
     public static String SALT = "congpham";
+
+    public static final String UPLOAD_SINGER_IMAGE = "/singer/";
+    public static final String UPLOAD_SONG_IMAGE = "/singer/song/";
+    public static final String UPLOAD_SONG_LIST = "/songList/";
+    public static final String UPLOAD_AVATAR_IMAGE = "/avatorImage/";
 }

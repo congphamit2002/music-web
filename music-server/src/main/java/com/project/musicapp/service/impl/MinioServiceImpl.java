@@ -1,11 +1,11 @@
 package com.project.musicapp.service.impl;
 
+import com.project.musicapp.constant.Constants;
 import com.project.musicapp.service.MinioService;
-import io.minio.BucketExistsArgs;
-import io.minio.MakeBucketArgs;
-import io.minio.MinioClient;
-import io.minio.PutObjectArgs;
+import io.minio.*;
 import io.minio.errors.*;
+import io.minio.messages.DeleteError;
+import io.minio.messages.DeleteObject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,21 +34,24 @@ public class MinioServiceImpl implements MinioService {
 
     @Override
     public String uploadImage(MultipartFile file) {
-        return upload(file, "/singer/");
+        return upload(file, Constants.UPLOAD_SINGER_IMAGE);
     }
 
     @Override
     public String uploadSongListImage(MultipartFile file) {
-        return upload(file, "/songList/");
+        return upload(file, Constants.UPLOAD_SONG_LIST);
     }
 
     @Override
     public String uploadSongImage(MultipartFile file) {
-        return upload(file, "/singer/song/");
+        return upload(file, Constants.UPLOAD_SONG_IMAGE
+        );
     }
 
     @Override
-    public String uploadAvatar(MultipartFile file) { return upload(file, "/avatorImage/"); }
+    public String uploadAvatar(MultipartFile file) {
+        return upload(file, Constants.UPLOAD_AVATAR_IMAGE);
+    }
 
     @Override
     public String upload(MultipartFile file, String prefixFileName) {
@@ -65,6 +70,47 @@ public class MinioServiceImpl implements MinioService {
             );
             return "File uploaded successfully!";
         } catch (MinioException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
+            return "Error uploading file to MinIO: " + e.getMessage();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public String removeFile(String fileName) {
+        try {
+            minioClient.removeObject(
+                    RemoveObjectArgs.builder()
+                            .bucket(bucketName)
+                            .object(fileName)
+                            .build()
+            );
+            return "File removed successfully!";
+        } catch (MinioException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
+            return "Error uploading file to MinIO: " + e.getMessage();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public String removeMultipleFile(List<String> fileName) {
+        try {
+            List<DeleteObject> deleteObjects = fileName.stream()
+                    .map(DeleteObject::new)
+                    .toList();
+            Iterable<Result<DeleteError>> results = minioClient.removeObjects(
+                    RemoveObjectsArgs.builder()
+                            .bucket(bucketName)
+                            .objects(deleteObjects)
+                            .build());
+            for (Result<DeleteError> result : results) {
+                DeleteError error = result.get();
+                return "Error deleting object " + error.objectName() + "; " + error.message();
+            }
+            return "File removed successfully!";
+        }
+        catch (MinioException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
             return "Error uploading file to MinIO: " + e.getMessage();
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
