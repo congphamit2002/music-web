@@ -1,19 +1,19 @@
 export const enum Icon {
-  PLAY = "#icon-bofang", // Play
-  PAUSE = "#icon-zanting", // Pause
-  VOLUME_ON = "#icon-yinliang", // Volume with background
-  VOLUME_OFF = "#icon-yinliang1", // Volume without background
-  HEADPHONES = "#icon-erji", // Headphones
-  SEARCH = "#icon-sousuo", // Search
-  DOWNLOAD = "#icon-xiazai", // Download
-  COLLAPSE = "#icon-jiantou-xia-cuxiantiao", // Collapse
-  PREVIOUS_TRACK = "#icon-ziyuanldpi", // Previous track
-  NEXT_TRACK = "#icon-ziyuanldpi1", // Next track
-  MUTE = "#icon-yinliangjingyinheix", // Mute
-  LIST = "#icon-liebiao", // List
-  DISLIKE = "#icon-xihuan1", // Not liked
-  LIKE = "#icon-xihuan", // Liked
-  SUPPORT = "#icon-zan", // Like
-  REPEAT = "#icon-xunhuan", // Repeat
-  SHUFFLE = "#icon-xunhuan1", // Shuffle
+  BOFANG = "#icon-bofang", // 播放
+  ZANTING = "#icon-zanting", // 暂停
+  YINLIANG = "#icon-yinliang", // 音量有背景
+  YINLIANG1 = "#icon-yinliang1", // 音量无背景
+  ERJI = "#icon-erji", // 耳机
+  SOUSUO = "#icon-sousuo", // 搜索
+  XIAZAI = "#icon-xiazai", // 下载
+  ZHEDIE = "#icon-jiantou-xia-cuxiantiao", // 折叠
+  SHANGYISHOU = "#icon-ziyuanldpi", // 上一首
+  XIAYISHOU = "#icon-ziyuanldpi1", // 下一首
+  JINGYIN = "#icon-yinliangjingyinheix", // 静音
+  LIEBIAO = "#icon-liebiao", // 列表
+  Dislike = "#icon-xihuan1", // 未收藏
+  Like = "#icon-xihuan", // 收藏
+  Support = "#icon-zan", // 赞
+  XUNHUAN = "#icon-xunhuan", // 循环
+  LUANXU = "#icon-xunhuan1", // 乱序
 }

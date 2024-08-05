@@ -3,29 +3,29 @@ import router from "../router";
 
 const BASE_URL = process.env.NODE_HOST;
 
-axios.defaults.timeout = 5000; // Thiết lập thời gian chờ
-axios.defaults.withCredentials = true; // true cho phép cross-domain
+axios.defaults.timeout = 5000; // Set timeout
+axios.defaults.withCredentials = true; // Allow cross-domain requests
 axios.defaults.baseURL = BASE_URL;
-// Content-Type trong header phản hồi
+// Set Content-Type in response headers
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded;charset=UTF-8";
 
-// Bộ chặn phản hồi
+// Response interceptor
 axios.interceptors.response.use(
   (response) => {
-    // Nếu trạng thái phản hồi là 200, tức là yêu cầu API thành công, có thể lấy được dữ liệu
-    // Ngược lại, ném ra lỗi
+    // If response status is 200, the API request was successful, data can be retrieved
+    // Otherwise, throw an error
     if (response.status === 200) {
       return Promise.resolve(response);
     } else {
       return Promise.reject(response);
     }
   },
-  // Tình huống trạng thái máy chủ không phải là số bắt đầu bằng 2
+  // Case when server status is not starting with a 2
   (error) => {
     if (error.response.status) {
       switch (error.response.status) {
-        // 401: Chưa đăng nhập
+        // 401: Not logged in
         case 401:
           router.replace({
             path: "/",
@@ -35,8 +35,8 @@ axios.interceptors.response.use(
           });
           break;
         case 403:
-          // console.log('Quyền quản trị viên đã thay đổi, vui lòng đăng nhập lại')
-          // Chuyển hướng đến trang đăng nhập và chuyển trang fullPath muốn xem qua, sau khi đăng nhập thành công sẽ chuyển hướng đến trang cần truy cập
+          // console.log('Admin privileges have changed, please log in again')
+          // Redirect to the login page and pass the fullPath of the page you want to view, after logging in successfully, it will redirect to the desired page
           setTimeout(() => {
             router.replace({
               path: "/",
@@ -47,9 +47,9 @@ axios.interceptors.response.use(
           }, 1000);
           break;
 
-        // 404 yêu cầu không tồn tại
+        // 404: Request does not exist
         case 404:
-          // console.log('Trang yêu cầu đã bay lên sao Hỏa')
+          // console.log('The requested page has flown to Mars')
           break;
       }
       return Promise.reject(error.response);
@@ -61,9 +61,9 @@ export function getBaseURL() {
   return BASE_URL;
 }
 
-export function get(url, params?: object) {
+export function get(url, params) {
   return new Promise((resolve, reject) => {
-    axios.get(url, params).then(
+    axios.get(url, { params }).then(
       (response) => resolve(response.data),
       (error) => reject(error)
     );
@@ -81,7 +81,7 @@ export function post(url, data = {}) {
 
 export function deletes(url, data = {}) {
   return new Promise((resolve, reject) => {
-    axios.delete(url, data).then(
+    axios.delete(url, { data }).then(
       (response) => resolve(response.data),
       (error) => reject(error)
     );
