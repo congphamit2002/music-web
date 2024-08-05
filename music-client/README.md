@@ -1,4 +1,4 @@
-# music-client
+# music-manager
 
 ## Project setup
 ```
