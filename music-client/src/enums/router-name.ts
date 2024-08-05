@@ -13,6 +13,6 @@ export const enum RouterName {
   Lyric = "/lyric",
   Error = "/404",
   SignOut = "0",
-  ForgotPassword="/FPassword",
-  loginByemail="/loginByemail",
+  ForgotPassword = "/FPassword",
+  loginByEmail = "/loginByEmail",
 }
