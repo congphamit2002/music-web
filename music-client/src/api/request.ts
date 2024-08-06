@@ -61,7 +61,7 @@ export function getBaseURL() {
   return BASE_URL;
 }
 
-export function get(url, params) {
+export function get(url, params?: object) {
   return new Promise((resolve, reject) => {
     axios.get(url, { params }).then(
       (response) => resolve(response.data),
