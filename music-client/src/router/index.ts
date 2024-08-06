@@ -42,16 +42,16 @@ const routes: Array<RouteRecordRaw> = [
       //   name: "song-sheet-detail",
       //   component: () => import("@/views/song-sheet/SongSheetDetail.vue"),
       // },
-      // {
-      //   path: "/singer",
-      //   name: "singer",
-      //   component: () => import("@/views/singer/Singer.vue"),
-      // },
-      // {
-      //   path: "/singer-detail/:id",
-      //   name: "singer-detail",
-      //   component: () => import("@/views/singer/SingerDetail.vue"),
-      // },
+      {
+        path: "/singer",
+        name: "singer",
+        component: () => import("@/views/singer/Singer.vue"),
+      },
+      {
+        path: "/singer-detail/:id",
+        name: "singer-detail",
+        component: () => import("@/views/singer/SingerDetail.vue"),
+      },
       // {
       //   path: "/lyric/:id",
       //   name: "lyric",
