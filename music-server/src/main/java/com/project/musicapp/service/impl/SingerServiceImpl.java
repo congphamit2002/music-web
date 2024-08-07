@@ -104,7 +104,7 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
             if(singerMapper.updateById(singer) > 0) {
                 return Response.success("Update singer avatar success");
             } else {
-                return Response.error("Delete singer avatar failed");
+                return Response.error("Update singer avatar failed");
             }
         } catch (DataNotFoundException e) {
             throw new RuntimeException(e);
