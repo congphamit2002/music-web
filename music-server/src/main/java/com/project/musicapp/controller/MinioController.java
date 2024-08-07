@@ -34,8 +34,8 @@ public class MinioController {
         return Response.success(minioService.removeMultipleFile(fileNames));
     }
 
-    @GetMapping("/download")
-    public ResponseEntity<InputStreamResource> downloadFile(@RequestParam String fileName) {
+    @GetMapping("/download/{fileName}")
+    public ResponseEntity<InputStreamResource> downloadFile(@PathVariable String fileName) {
         try {
             InputStream fileStream = minioService.downloadFile(fileName);
             return ResponseEntity.ok()

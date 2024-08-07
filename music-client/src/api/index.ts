@@ -71,39 +71,39 @@ const HttpManager = {
 
   // =======================> Playlist API Completed
   // Get all playlists
-  getSongList: () => get("songList"),
+  getSongList: () => get("songLists"),
 
   // Get playlists by genre
-  getSongListOfStyle: (style) => get(`songList/style/detail?style=${style}`),
+  getSongListOfStyle: (style) => get(`songLists/style?style=${style}`),
 
   // Return playlists with titles containing specified keywords
   getSongListOfLikeTitle: (keywords) =>
-    get(`songList/likeTitle/detail?title=${keywords}`),
+    get(`songLists/title?title=${keywords}`),
 
   // Return songs from a playlist by playlist ID
   getListSongOfSongId: (songListId) =>
-    get(`listSong/detail?songListId=${songListId}`),
+    get(`listSongs/songList/?songListId=${songListId}`),
 
   // =======================> Singer API Completed
   // Return all singers
-  getAllSinger: () => get("singer"),
+  getAllSinger: () => get("singers"),
 
   // Categorize singers by gender
-  getSingerOfSex: (sex) => get(`singer/sex/detail?sex=${sex}`),
+  getSingerOfSex: (sex) => get(`singers/sex?sex=${sex}`),
 
   // =======================> Collection API Completed
   // Return the collection list for a specific user ID
-  getCollectionOfUser: (userId) => get(`collection/detail?userId=${userId}`),
+  getCollectionOfUser: (userId) => get(`collections/detail?userId=${userId}`),
 
   // Add a song to the collection; type: 0 for songs, 1 for playlists
   setCollection: ({ userId, type, songId }) =>
-    post(`collection/add`, { userId, type, songId }),
+    post(`collections/add`, { userId, type, songId }),
 
   deleteCollection: (userId, songId) =>
-    deletes(`collection/delete?userId=${userId}&&songId=${songId}`),
+    deletes(`collections?userId=${userId}&&songId=${songId}`),
 
   isCollection: ({ userId, type, songId }) =>
-    post(`collection/status`, { userId, type, songId }),
+    post(`collections/status?userId=${userId}&&songId=${songId}`),
 
   // =======================> Rating API Completed
   // Submit rating
@@ -141,12 +141,13 @@ const HttpManager = {
 
   // =======================> Song API
   // Return song by song ID
-  getSongOfId: (id) => get(`song/detail?id=${id}`),
+  getSongOfId: (id) => get(`songs/${id}`),
 
   // Return songs by singer ID
-  getSongOfSingerId: (id) => get(`song/singer/detail?singerId=${id}`),
+  getSongOfSingerId: (id) => get(`song/singers/${id}`),
 
   // Return songs by singer name
+  // TODO: CHECK
   getSongOfSingerName: (keywords) =>
     get(`song/singerName/detail?name=${keywords}`),
 
@@ -164,7 +165,7 @@ const HttpManager = {
     post(`userSupport/insert`, { commentId, userId }),
 
   // Get all posters
-  getBannerList: () => get("banner/getAllBanner"),
+  getBannerList: () => get("banners"),
 };
 
 export { HttpManager };
