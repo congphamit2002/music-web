@@ -1,6 +1,7 @@
 spring:
   application:
     name: music-app
+
   # config database properties
   datasource:
     url: jdbc:mysql://localhost:3307/music-app?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
@@ -27,3 +28,6 @@ minio:
   access-key: root
   secret-key: 12345678
   bucket-name: music-web
+
+server:
+  port: 8888
