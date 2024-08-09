@@ -20,7 +20,7 @@
         <el-icon><mic /></el-icon>
         <span>Artist Management</span>
       </el-menu-item>
-      <el-menu-item index="songList">
+      <el-menu-item index="song-list">
         <el-icon><Document /></el-icon>
         <span>Playlist Management</span>
       </el-menu-item>

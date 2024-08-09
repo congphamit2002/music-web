@@ -8,6 +8,18 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/home",
     component: () => import("@/views/Home.vue"),
+    children: [
+      {
+        path: "/song-list",
+        component: () => import("@/views/SongListPage.vue"),
+        meta: { title: "SongList" },
+      },
+      {
+        path: "/list-song",
+        component: () => import("@/views/ListSongPage.vue"),
+        meta: { title: "ListSong" },
+      },
+    ],
   },
 ];
 

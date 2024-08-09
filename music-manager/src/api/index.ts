@@ -1,8 +1,8 @@
-import { deletes, get, getBaseURL, post } from "./request";
+import { deletes, get, getBaseURL, post, put } from "./request";
 
 const HttpManager = {
   // Get image URL
-  attachImageUrl: (url) => `${getBaseURL()}/${url}`,
+  attachImageUrl: (url) => `${getBaseURL()}/file?fileName=${url}`,
 
   // =======================> Admin API Complete
   // Check login status
@@ -60,16 +60,16 @@ const HttpManager = {
 
   // =======================> Song API Complete
   // Get all songs
-  getAllSong: () => get(`song`),
+  getAllSong: () => get(`songs`),
   // Get songs by singer ID
-  getSongOfSingerId: (id) => get(`song/singer/detail?singerId=${id}`),
+  getSongOfSingerId: (id) => get(`songs/singers/${id}`),
   // Get song by ID
-  getSongOfId: (id) => get(`song/detail?id=${id}`),
+  getSongOfId: (id) => get(`songs/${id}`),
   // Get songs by singer name
   getSongOfSingerName: (id) => get(`song/singerName/detail?name=${id}`),
   // Update song information
   updateSongMsg: ({ id, singerId, name, introduction, lyric }) =>
-    post(`song/update`, {
+    put(`songs`, {
       id,
       singerId,
       name,
@@ -80,29 +80,32 @@ const HttpManager = {
   updateSongImg: (id) => `${getBaseURL()}/song/img/update?id=${id}`,
   updateSongLrc: (id) => `${getBaseURL()}/song/lrc/update?id=${id}`,
   // Delete a song
-  deleteSong: (id) => deletes(`song/delete?id=${id}`),
+  deleteSong: (id) => deletes(`songs/${id}`),
 
   // =======================> Playlist API Complete
   // Add a playlist
   setSongList: ({ title, introduction, style }) =>
-    post(`songList/add`, { title, introduction, style }),
+    post(`songLists`, { title, introduction, style }),
   // Get all playlists
-  getSongList: () => get(`songList`),
+  getSongList: () => get(`songLists`),
   // Update playlist information
   updateSongListMsg: ({ id, title, introduction, style }) =>
-    post(`songList/update`, { id, title, introduction, style }),
+    put(`songLists/${id}`, { id, title, introduction, style }),
   // Delete a playlist
-  deleteSongList: (id) => get(`songList/delete?id=${id}`),
+  deleteSongList: (id) => get(`songLists/${id}`),
+
+  // Update songlist img
+  updateSongListImg: (id) => `${getBaseURL()}/songLists/${id}/avatar`,
 
   // =======================> Playlist Song API Complete
   // Add a song to a playlist
   setListSong: ({ songId, songListId }) =>
-    post(`listSong/add`, { songId, songListId }),
+    post(`listSongs`, { songId, songListId }),
   // Get songs in a playlist by playlist ID
-  getListSongOfSongId: (songListId) =>
-    get(`listSong/detail?songListId=${songListId}`),
+  getListSongOfSongListId: (songListId) =>
+    get(`listSongs/songList/${songListId}`),
   // Delete a song from a playlist
-  deleteListSong: (songId) => get(`listSong/delete?songId=${songId}`),
+  deleteListSong: (songId) => get(`listSongs/${songId}`),
 };
 
 export { HttpManager };
