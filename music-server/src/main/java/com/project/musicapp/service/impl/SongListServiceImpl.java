@@ -59,7 +59,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
     public Response updateSongListImg(int id, MultipartFile image) {
         try {
             SongList songList = this.getSongListById(id);
-            minioService.uploadImage(image);
+            minioService.uploadSongListImage(image);
             songList.setPic(Constants.UPLOAD_SONG_LIST + image.getOriginalFilename());
             if(songListMapper.updateById(songList) > 0) {
                 return Response.success("Update song list avatar success");

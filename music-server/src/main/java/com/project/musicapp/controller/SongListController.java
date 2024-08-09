@@ -43,7 +43,7 @@ public class SongListController {
         return songListService.deleteSongList(id);
     }
 
-    @PutMapping("/{id}/avatar")
+    @PostMapping("/{id}/avatar")
     public Response updateSongListAvatar(@PathVariable Integer id, @RequestParam MultipartFile file) {
         return songListService.updateSongListImg(id, file);
     }
