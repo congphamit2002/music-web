@@ -47,7 +47,7 @@ emitter.on("collapse", (msg) => {
   top: 60px;
   bottom: 0;
   overflow-y: scroll;
-  width: 10%;
+  width: 200px;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -56,5 +56,9 @@ emitter.on("collapse", (msg) => {
 
 .sidebar > ul {
   height: 100%;
+}
+
+.sidebar-el-menu:not(.el-menu--collapse) {
+  width: 200px;
 }
 </style>

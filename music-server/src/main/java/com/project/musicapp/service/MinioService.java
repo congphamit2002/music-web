@@ -10,6 +10,7 @@ public interface MinioService {
     String uploadImage(MultipartFile file);
     String uploadSongListImage(MultipartFile file);
     String uploadSongImage(MultipartFile file);
+    String uploadSongAudio(MultipartFile file);
     String uploadAvatar(MultipartFile file);
     String upload(MultipartFile file, String prefixFileName);
     String removeFile(String fileName);

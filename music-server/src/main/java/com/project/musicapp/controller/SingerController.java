@@ -44,7 +44,7 @@ public class SingerController {
         return singerService.deleteSinger(id);
     }
 
-    @PutMapping("/{id}/avatar")
+    @PostMapping("/{id}/avatar")
     public Response updateSingerAvatar(@PathVariable Integer id, @RequestParam MultipartFile file) {
         return singerService.updateSingerAvatar(id, file);
     }
