@@ -3,7 +3,7 @@
     controls="controls"
     preload="true"
     v-if="url"
-    :ref="player"
+    ref="player"
     :src="attachImageUrl(url)"
     @canplay="startPlay"
     @ended="ended"
@@ -19,27 +19,24 @@ export default defineComponent({
   setup() {
     const { proxy } = getCurrentInstance();
     const store = useStore();
-    const divRef = ref<HTMLAudioElement>();
-    const player = (el) => {
-      divRef.value = el;
-    };
-
-    const url = computed(() => store.getters.url); // Music link
+    const player = ref(null);
     const isPlay = computed(() => store.getters.isPlay); // Playback status
+    const url = computed(() => store.getters.url); // Music link
 
     // Watch for playback status changes
     watch(isPlay, () => {
       togglePlay();
     });
 
-    // Play or pause the audio
     function togglePlay() {
-      isPlay.value ? divRef.value.play() : divRef.value.pause();
+      if (player.value) {
+        isPlay.value ? player.value.play() : player.value.pause();
+      }
     }
 
     // Start playback when the audio can play
     function startPlay() {
-      divRef.value.play();
+      player.value.play();
     }
     // Triggered when music playback ends
     function ended() {
