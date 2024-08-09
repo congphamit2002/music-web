@@ -35,10 +35,10 @@ const HttpManager = {
 
   // =======================> Singer API Complete
   // Get all singers
-  getAllSinger: () => get(`singer`),
+  getAllSinger: () => get(`singers`),
   // Add a singer
   setSinger: ({ name, sex, birth, location, introduction }) =>
-    post(`singer/add`, {
+    post(`singers`, {
       name,
       sex,
       birth,
@@ -47,7 +47,7 @@ const HttpManager = {
     }),
   // Update singer information
   updateSingerMsg: ({ id, name, sex, birth, location, introduction }) =>
-    post(`singer/update`, {
+    put(`singers`, {
       id,
       name,
       sex,
@@ -55,8 +55,11 @@ const HttpManager = {
       location,
       introduction,
     }),
+  // update singer avatar
+  updateSingerImg: (id) => `${getBaseURL()}/singers/${id}/avatar`,
+
   // Delete a singer
-  deleteSinger: (id) => deletes(`singer/delete?id=${id}`),
+  deleteSinger: (id) => deletes(`singers/${id}`),
 
   // =======================> Song API Complete
   // Get all songs
@@ -76,8 +79,8 @@ const HttpManager = {
       introduction,
       lyric,
     }),
-  updateSongUrl: (id) => `${getBaseURL()}/song/url/update?id=${id}`,
-  updateSongImg: (id) => `${getBaseURL()}/song/img/update?id=${id}`,
+  updateSongUrl: (id) => `${getBaseURL()}/songs/${id}/songUrl`,
+  updateSongImg: (id) => `${getBaseURL()}/songs/${id}/picture`,
   updateSongLrc: (id) => `${getBaseURL()}/song/lrc/update?id=${id}`,
   // Delete a song
   deleteSong: (id) => deletes(`songs/${id}`),

@@ -72,8 +72,8 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
     public Response updateSongUrl(int songId, MultipartFile songFile) {
         try {
             Song song = this.getSongById(songId);
-            minioService.uploadImage(songFile);
-            song.setUrl("/singer/" + songFile.getOriginalFilename());
+            minioService.uploadSongAudio(songFile);
+            song.setUrl(Constants.UPLOAD_SONG_AUDIO + songFile.getOriginalFilename());
             if(songMapper.updateById(song) > 0) {
                 return Response.success("Update song url success");
             } else {
@@ -91,11 +91,11 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
         try {
             Song song = this.getSongById(songId);
             minioService.uploadSongImage(picture);
-            song.setUrl("/ singer/ song/" + picture.getOriginalFilename());
+            song.setPic(Constants.UPLOAD_SONG_IMAGE + picture.getOriginalFilename());
             if(songMapper.updateById(song) > 0) {
-                return Response.success("Update song url success");
+                return Response.success("Update song picture success");
             } else {
-                return Response.error("Update song url failed");
+                return Response.error("Update song picture failed");
             }
         } catch (DataNotFoundException e) {
             throw new RuntimeException(e);

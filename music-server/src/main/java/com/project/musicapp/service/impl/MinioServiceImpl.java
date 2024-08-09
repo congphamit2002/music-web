@@ -50,6 +50,12 @@ public class MinioServiceImpl implements MinioService {
     }
 
     @Override
+    public String uploadSongAudio(MultipartFile file) {
+        return upload(file, Constants.UPLOAD_SONG_AUDIO
+        );
+    }
+
+    @Override
     public String uploadAvatar(MultipartFile file) {
         return upload(file, Constants.UPLOAD_AVATAR_IMAGE);
     }

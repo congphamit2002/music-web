@@ -23,7 +23,7 @@ emitter.on("collapse", (msg) => {
 <style scoped>
 .content-box {
   position: absolute;
-  width: 90%;
+  left: 200px;
   right: 0;
   top: 60px;
   bottom: 0;

@@ -33,17 +33,17 @@ public class SongController {
         return songService.updateSong(id, songRequest);
     }
 
-    @PutMapping("/{id}/songUrl")
-    public Response updateSongUrl(@PathVariable int id, @RequestParam MultipartFile songFile) {
-        return songService.updateSongUrl(id, songFile);
+    @PostMapping("/{id}/songUrl")
+    public Response updateSongUrl(@PathVariable int id, @RequestParam MultipartFile file) {
+        return songService.updateSongUrl(id, file);
     }
 
-    @PutMapping("/{id}/picture")
-    public Response updateSongPicture(@PathVariable int id, @RequestParam MultipartFile songPicture) {
-        return songService.updateSongPicture(id, songPicture);
+    @PostMapping("/{id}/picture")
+    public Response updateSongPicture(@PathVariable int id, @RequestParam MultipartFile file) {
+        return songService.updateSongPicture(id, file);
     }
 
-    @PutMapping("/{id}/lyric")
+    @PostMapping("/{id}/lyric")
     public Response updateSongLyric(@PathVariable int id, @RequestParam MultipartFile lyricFile) {
         return songService.updateSongLyric(id, lyricFile);
     }

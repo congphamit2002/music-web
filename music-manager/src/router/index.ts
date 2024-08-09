@@ -19,6 +19,16 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/ListSongPage.vue"),
         meta: { title: "ListSong" },
       },
+      {
+        path: '/singer',
+        component: () => import('@/views/SingerPage.vue'),
+        meta: { title: 'Singer' }
+      },
+      {
+        path: '/song',
+        component: () => import('@/views/SongPage.vue'),
+        meta: { title: 'Song' }
+      },
     ],
   },
 ];
