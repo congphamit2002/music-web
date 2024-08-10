@@ -86,6 +86,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+    public Response userById(int id) {
+        try {
+            return Response.success(null, this.getUserById(id));
+        } catch (DataNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (RuntimeException e) {
+            return Response.error(e.getMessage());
+        }
+    }
+
+    @Override
     public User getUserById(int id) throws DataNotFoundException {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id", id);
