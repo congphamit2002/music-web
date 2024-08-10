@@ -30,9 +30,14 @@ const routes: Array<RouteRecordRaw> = [
         meta: { title: "Song" },
       },
       {
-        path: "/Comment",
+        path: "/comment",
         component: () => import("@/views/CommentPage.vue"),
         meta: { title: "Comment" },
+      },
+      {
+        path: '/info',
+        component: () => import('@/views/InfoPage.vue'),
+        meta: { title: 'Info' }
       },
     ],
   },
