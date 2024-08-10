@@ -4,7 +4,7 @@ const HttpManager = {
   // Get image information
   attachImageUrl: (url) =>
     url
-      ? `${getBaseURL()}/${url}`
+      ? `${getBaseURL()}/file?fileName=${url}`
       : "https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png",
 
   // =======================> User API Completed
@@ -144,7 +144,7 @@ const HttpManager = {
   getSongOfId: (id) => get(`songs/${id}`),
 
   // Return songs by singer ID
-  getSongOfSingerId: (id) => get(`song/singers/${id}`),
+  getSongOfSingerId: (id) => get(`songs/singers/${id}`),
 
   // Return songs by singer name
   // TODO: CHECK
