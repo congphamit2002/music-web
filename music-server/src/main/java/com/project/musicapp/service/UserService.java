@@ -10,5 +10,6 @@ public interface UserService extends IService<User> {
     Response addUser(UserRequest userRequest);
     Response updateUser(int id, UserRequest userRequest);
     boolean existUser(String username);
+    Response userById(int id);
     User getUserById(int id) throws DataNotFoundException;
 }

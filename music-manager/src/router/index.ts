@@ -20,14 +20,19 @@ const routes: Array<RouteRecordRaw> = [
         meta: { title: "ListSong" },
       },
       {
-        path: '/singer',
-        component: () => import('@/views/SingerPage.vue'),
-        meta: { title: 'Singer' }
+        path: "/singer",
+        component: () => import("@/views/SingerPage.vue"),
+        meta: { title: "Singer" },
       },
       {
-        path: '/song',
-        component: () => import('@/views/SongPage.vue'),
-        meta: { title: 'Song' }
+        path: "/song",
+        component: () => import("@/views/SongPage.vue"),
+        meta: { title: "Song" },
+      },
+      {
+        path: "/Comment",
+        component: () => import("@/views/CommentPage.vue"),
+        meta: { title: "Comment" },
       },
     ],
   },

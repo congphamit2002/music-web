@@ -70,7 +70,8 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     public Response commentOfSongId(int songId) {
         try {
             QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("songId", songId);
+            queryWrapper.eq("song_id", songId);
+            commentMapper.selectList(queryWrapper).stream().forEach(System.out::println);
             return Response.success(null, commentMapper.selectList(queryWrapper));
         } catch (RuntimeException e) {
             return Response.error(e.getMessage());
@@ -81,7 +82,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     public Response commentOfSongListId(int songListId) {
         try {
             QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("songListId", songListId);
+            queryWrapper.eq("song_list_id", songListId);
             return Response.success(null, commentMapper.selectList(queryWrapper));
         } catch (RuntimeException e) {
             return Response.error(e.getMessage());

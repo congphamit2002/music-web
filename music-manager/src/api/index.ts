@@ -13,7 +13,7 @@ const HttpManager = {
   // Get all users
   getAllUser: () => get(`user`),
   // Get user by ID
-  getUserOfId: (id) => get(`user/detail?id=${id}`),
+  getUserOfId: (id) => get(`users/${id}`),
   // Delete user
   deleteUser: (id) => get(`user/delete?id=${id}`),
 
@@ -26,12 +26,12 @@ const HttpManager = {
 
   // =======================> Comment API Complete
   // Get comments for a specific song ID
-  getCommentOfSongId: (songId) => get(`comment/song/detail?songId=${songId}`),
+  getCommentOfSongId: (songId) => get(`comments/songs/${songId}`),
   // Get comments for a specific playlist ID
   getCommentOfSongListId: (songListId) =>
-    get(`comment/songList/detail?songListId=${songListId}`),
+    get(`comments/song-lists/${songListId}`),
   // Delete a comment
-  deleteComment: (id) => get(`comment/delete?id=${id}`),
+  deleteComment: (id) => deletes(`comments/${id}`),
 
   // =======================> Singer API Complete
   // Get all singers
