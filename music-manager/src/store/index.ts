@@ -10,8 +10,12 @@ export default createStore({
   },
   getters: {
     userPic: (state) => state.userPic,
-    isPlay: (state) => state.isPlay,
-    url: (state) => state.url,
+    isPlay: (state) => {
+      return state.isPlay;
+    },
+    url: (state) => {
+      return state.url;
+    },
     id: (state) => state.id,
     breadcrumbList: (state) => state.breadcrumbList,
   },

@@ -1,5 +1,13 @@
 <template>
-  <audio :src="attachImageUrl(songUrl)" controls="controls" :ref="player" preload="true" @canplay="canplay" @timeupdate="timeupdate" @ended="ended">
+  <audio
+    :src="attachImageUrl(songUrl)"
+    controls="controls"
+    ref="player"
+    preload="true"
+    @canplay="canplay"
+    @timeupdate="timeupdate"
+    @ended="ended"
+  >
     <!-- (1) Attributes: controls, preload (2) Events: canplay, timeupdate, ended (3) Methods: play(), pause() -->
     <!-- controls: Displays audio controls (play/pause/progress bar/volume) to the user -->
     <!-- preload: Specifies whether to load the audio when the page loads -->
@@ -13,31 +21,29 @@
 import { defineComponent, ref, getCurrentInstance, computed, watch } from "vue";
 import { useStore } from "vuex";
 import { HttpManager } from "@/api";
-import { onMounted } from 'vue';
+import { onMounted } from "vue";
+import { pl } from "element-plus/es/locale";
 
 export default defineComponent({
   setup() {
-
     const { proxy } = getCurrentInstance();
     const store = useStore();
-    const divRef = ref<HTMLAudioElement>();
-    const player = (el) => {
-      divRef.value = el;
-    };
+    const player = ref(null);
 
     const muted = ref(true); // Add a reactive muted property
 
-    const audioDom = document.querySelector('audio');
+    const audioDom = document.querySelector("audio");
     if (audioDom) {
       // Set to muted and try to autoplay
       audioDom.muted = true;
-      audioDom.play()
+      audioDom
+        .play()
         .then(() => {
           // Autoplay succeeded
         })
-        .catch(error => {
+        .catch((error) => {
           // Autoplay failed, possibly due to no user interaction
-          console.error('Autoplay failed, user interaction required.', error);
+          console.error("Autoplay failed, user interaction required.", error);
         });
     }
 
@@ -50,27 +56,32 @@ export default defineComponent({
     // Watch for play or pause
     watch(isPlay, () => togglePlay());
     // Jump to specified time to play
-    watch(changeTime, () => (divRef.value.currentTime = changeTime.value));
-    watch(volume, (value) => (divRef.value.volume = value));
+    watch(changeTime, () => {
+      console.log("Change time watch ", changeTime.value);
+      player.value.currentTime = changeTime.value;
+    });
+    watch(volume, (value) => (player.value.volume = value));
 
     // Start / Pause
     function togglePlay() {
-      isPlay.value ? divRef.value.play() : divRef.value.pause();
+      if (player.value) {
+        isPlay.value ? player.value.play() : player.value.pause();
+      }
     }
     // Prepare to play after getting the song URL
     function canplay() {
       // Record music duration
-      proxy.$store.commit("setDuration", divRef.value.duration);
+      proxy.$store.commit("setDuration", player.value.duration);
       // Start playing
       if (muted.value) {
-        divRef.value.muted = false;
+        player.value.muted = false;
         muted.value = false;
       }
       proxy.$store.commit("setIsPlay", true);
     }
     // Record the current playback position when the music is playing
     function timeupdate() {
-      proxy.$store.commit("setCurTime", divRef.value.currentTime);
+      proxy.$store.commit("setCurTime", player.value.currentTime);
     }
     // Triggered when the music finishes playing
     function ended() {
