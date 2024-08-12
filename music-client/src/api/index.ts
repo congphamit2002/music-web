@@ -82,7 +82,7 @@ const HttpManager = {
 
   // Return songs from a playlist by playlist ID
   getListSongOfSongId: (songListId) =>
-    get(`listSongs/songList/?songListId=${songListId}`),
+    get(`listSongs/songList/${songListId}`),
 
   // =======================> Singer API Completed
   // Return all singers
@@ -108,14 +108,14 @@ const HttpManager = {
   // =======================> Rating API Completed
   // Submit rating
   setRank: ({ songListId, consumerId, score }) =>
-    post(`rankList/add`, { songListId, consumerId, score }),
+    post(`rankLists`, { songListId, consumerId, score }),
 
   // Get ratings for a specific playlist
-  getRankOfSongListId: (songListId) => get(`rankList?songListId=${songListId}`),
+  getRankOfSongListId: (songListId) => get(`rankLists/songLists/${songListId}`),
 
   // Get user's ratings for playlists
-  getUserRank: (consumerId, songListId) =>
-    get(`/rankList/user?consumerId=${consumerId}&songListId=${songListId}`),
+  getUserRank: (userId, songListId) =>
+    get(`/rankList/user?userId=${userId}&songListId=${songListId}`),
 
   // =======================> Comment API Completed
   // Add comment
@@ -132,9 +132,9 @@ const HttpManager = {
   getAllComment: (type, id) => {
     let url = "";
     if (type === 1) {
-      url = `comment/songList/detail?songListId=${id}`;
+      url = `comments/song-lists/${id}`;
     } else if (type === 0) {
-      url = `comment/song/detail?songId=${id}`;
+      url = `comments/songs/${id}`;
     }
     return get(url);
   },

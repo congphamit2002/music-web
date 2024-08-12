@@ -249,6 +249,7 @@ export default defineComponent({
       this.$store.commit("setIsPlay", this.isPlay ? false : true);
     },
     changeTime() {
+      console.log("Now time after ", this.nowTime)
       this.$store.commit(
         "setChangeTime",
         this.duration * (this.nowTime * 0.01)
