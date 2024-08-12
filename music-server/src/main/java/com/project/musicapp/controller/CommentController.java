@@ -37,4 +37,9 @@ public class CommentController {
     public Response getCommentBySongListId(@PathVariable int songListId) {
         return commentService.commentOfSongListId(songListId);
     }
+
+    @PostMapping("/{id}/like")
+    public Response likeComment(@PathVariable int id, @RequestBody CommentRequest commentRequest) {
+        return commentService.updateCommentMsg(id, commentRequest);
+    }
 }
