@@ -156,13 +156,13 @@ const HttpManager = {
 
   //======================> Optimize the like API to avoid duplicate likes; a new data table is required
   testAlreadySupport: ({ commentId, userId }) =>
-    post(`userSupport/test`, { commentId, userId }),
+    get(`userSupports/exist`, { commentId, userId }),
 
   deleteUserSupport: ({ commentId, userId }) =>
-    post(`userSupport/delete`, { commentId, userId }),
+    post(`userSupports/unlike`, { commentId, userId }),
 
   insertUserSupport: ({ commentId, userId }) =>
-    post(`userSupport/insert`, { commentId, userId }),
+    post(`userSupports/like`, { commentId, userId }),
 
   // Get all posters
   getBannerList: () => get("banners"),
