@@ -76,7 +76,7 @@ export default defineComponent({
         const resultSong = (await HttpManager.getSongOfId(
           item.songId
         )) as ResponseBody;
-        currentSongList.value.push(resultSong.data[0]);
+        currentSongList.value.push(resultSong.data);
       }
     }
 

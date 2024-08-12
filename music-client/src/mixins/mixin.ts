@@ -79,7 +79,7 @@ export default function () {
       return;
     }
     const fileName = getFileName(songUrl);
-    const downUrl = "/download/" + fileName;
+    const downUrl = `/file/download?fileName=${songUrl}`;
 
     const response = await axios.get(downUrl, {
       responseType: "blob", // Chỉ định loại phản hồi là dữ liệu nhị phân

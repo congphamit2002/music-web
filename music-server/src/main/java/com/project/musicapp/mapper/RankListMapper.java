@@ -6,4 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface RankListMapper extends BaseMapper<RankList> {
+    Integer selectScoreSum(Long songListId);
+    Integer selectUserRank(Long consumerId, Long songListId);
 }
