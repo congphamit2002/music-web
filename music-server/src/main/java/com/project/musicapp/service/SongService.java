@@ -26,7 +26,7 @@ public interface SongService extends IService<Song> {
 
     Response songOfId(Integer id);
 
-    Response songOfSingerName(String singerName);
+    Response songlikeName(String name);
 
     Song getSongById(int id) throws DataNotFoundException;
 }

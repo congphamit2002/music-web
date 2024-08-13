@@ -57,4 +57,9 @@ public class SongController {
     public Response songOfSingerId(@PathVariable int singerId) {
         return songService.songOfSingerId(singerId);
     }
+
+    @GetMapping("/name")
+    public Response getSongOfSingerName(@RequestParam String name) {
+        return songService.songlikeName(name);
+    }
 }

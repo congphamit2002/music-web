@@ -178,8 +178,14 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
 
     // Pending, check UI
     @Override
-    public Response songOfSingerName(String singerName) {
-        return null;
+    public Response songlikeName(String name) {
+        try {
+            QueryWrapper<Song> queryWrapper = new QueryWrapper<>();
+            queryWrapper.like("name", name);
+            return Response.success(null, songMapper.selectList(queryWrapper));
+        } catch (RuntimeException e) {
+            return Response.error(e.getMessage());
+        }
     }
 
     @Override
