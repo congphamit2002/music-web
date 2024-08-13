@@ -149,7 +149,7 @@ const HttpManager = {
   // Return songs by singer name
   // TODO: CHECK
   getSongOfSingerName: (keywords) =>
-    get(`song/singerName/detail?name=${keywords}`),
+    get(`songs/name?name=${keywords}`),
 
   // Download music
   downloadMusic: (url) => get(url, { responseType: "blob" }),

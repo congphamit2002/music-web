@@ -19,6 +19,7 @@ export default defineComponent({
     const { proxy } = getCurrentInstance();
 
     function handleChangeView(val) {
+      
       proxy.$emit("click", val);
     }
     return {
