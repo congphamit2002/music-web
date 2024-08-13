@@ -52,11 +52,11 @@ const routes: Array<RouteRecordRaw> = [
         name: "singer-detail",
         component: () => import("@/views/singer/SingerDetail.vue"),
       },
-      // {
-      //   path: "/lyric/:id",
-      //   name: "lyric",
-      //   component: () => import("@/views/Lyric.vue"),
-      // },
+      {
+        path: "/lyric/:id",
+        name: "lyric",
+        component: () => import("@/views/Lyric.vue"),
+      },
       // {
       //   path: "/search",
       //   name: "search",
