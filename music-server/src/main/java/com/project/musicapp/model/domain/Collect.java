@@ -1,13 +1,15 @@
-package model.domain;
+package com.project.musicapp.model.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 
 import java.util.Date;
 
 @TableName(value = "collect")
+@Data
 public class Collect {
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Integer id;
 
     private Integer userId;
 

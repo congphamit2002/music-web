@@ -1,10 +1,12 @@
-package model.domain;
+package com.project.musicapp.model.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 
 import java.util.Date;
 
 @TableName(value = "song")
+@Data
 public class Song {
     @TableId(type = IdType.AUTO)
     private Integer id;

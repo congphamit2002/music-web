@@ -1,4 +1,4 @@
-package model.domain;
+package com.project.musicapp.model.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -27,9 +27,11 @@ public class User {
 
     private String avator;
 
+    private Role role;
+
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
-    @TableField(fill = FieldFill.UPDATE)
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 }
