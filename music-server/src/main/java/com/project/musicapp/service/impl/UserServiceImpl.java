@@ -2,17 +2,26 @@ package com.project.musicapp.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.gson.Gson;
 import com.project.musicapp.common.Response;
 import com.project.musicapp.constant.Constants;
 import com.project.musicapp.exception.DataNotFoundException;
+import com.project.musicapp.helper.JwtProvider;
 import com.project.musicapp.mapper.UserMapper;
 import com.project.musicapp.model.domain.User;
+import com.project.musicapp.model.request.LoginRequest;
 import com.project.musicapp.model.request.UserRequest;
 import com.project.musicapp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -24,8 +33,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private final UserMapper userMapper;
 
     /*
-        TODO: Set password to bcrypt
-    */
+            TODO: Set password to bcrypt
+        */
     @Override
     public Response addUser(UserRequest userRequest) {
         if (this.existUser(userRequest.getUsername())) {
@@ -105,5 +114,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new DataNotFoundException("Can not find user by id " + id);
         }
         return user;
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        System.out.println("IN GET USER  " + username);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        return userMapper.selectOne(queryWrapper);
     }
 }
