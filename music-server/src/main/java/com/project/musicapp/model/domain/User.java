@@ -27,6 +27,8 @@ public class User {
 
     private String avator;
 
+    private Role role;
+
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 

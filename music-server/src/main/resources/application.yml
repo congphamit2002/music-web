@@ -32,3 +32,7 @@ minio:
 
 server:
   port: 8888
+
+security:
+  secret_key: YWRtaW5AMTIzNDU2Nzg5MGFkbWluQDEyMzQ1Njc4OTBhZG1pbkAxMjM0NTY3ODkwCg==
+  jwt_expired: 604800000
