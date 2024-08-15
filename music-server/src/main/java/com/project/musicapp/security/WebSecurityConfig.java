@@ -62,7 +62,7 @@ public class WebSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers("/api/v1/login")
+                        req.requestMatchers("/api/v1/login", "/file/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()

@@ -7,6 +7,7 @@ import com.project.musicapp.mapper.TokenMapper;
 import com.project.musicapp.model.domain.Token;
 import com.project.musicapp.model.domain.User;
 import com.project.musicapp.model.request.LoginRequest;
+import com.project.musicapp.model.response.LoginResponse;
 import com.project.musicapp.service.LoginService;
 import com.project.musicapp.service.TokenService;
 import com.project.musicapp.service.UserService;
@@ -44,7 +45,12 @@ public class LoginServiceIml implements LoginService {
             User user = userService.getUserByUsername(loginRequest.getUsername());
             revokeAllTokenByUser(user);
             saveUserToken(jwtToken, user);
-            return Response.success(null, jwtToken);
+            LoginResponse loginResponse = new LoginResponse();
+            loginResponse.setUserId(user.getId());
+            loginResponse.setAvatar(user.getAvator());
+            loginResponse.setUserName(user.getUsername());
+            loginResponse.setAccessToken(jwtToken);
+            return Response.success(null, loginResponse);
         } catch (UsernameNotFoundException e) {
             // Handle case where the user is not found
             System.err.println("User not found: " + e.getMessage());

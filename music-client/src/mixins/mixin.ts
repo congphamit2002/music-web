@@ -127,7 +127,8 @@ export default function () {
       case RouterName.SignUp:
       case RouterName.SignOut:
       case RouterName.Lyric:
-      case RouterName.Error:
+      case RouterName.Error403:
+      case RouterName.Error404:
       default:
         router.push({ path: options.path });
         break;

@@ -6,7 +6,7 @@ declare module "*.vue" {
 }
 
 interface ResponseBody {
-  code: string;
+  code: integer;
   success: boolean;
   message: string;
   type: string;

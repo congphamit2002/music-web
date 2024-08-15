@@ -1,5 +1,7 @@
 import axios from "axios";
 import router from "../router";
+import store from "@/store";
+import { RouterName } from "@/enums";
 
 const BASE_URL = process.env.NODE_HOST;
 
@@ -9,6 +11,20 @@ axios.defaults.baseURL = BASE_URL;
 // Set Content-Type in response headers
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded;charset=UTF-8";
+
+axios.interceptors.request.use(
+  async (config) => {
+    const token = store.getters.token;
+    console.log("Check token ", token);
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 // Response interceptor
 axios.interceptors.response.use(
@@ -28,10 +44,7 @@ axios.interceptors.response.use(
         // 401: Not logged in
         case 401:
           router.replace({
-            path: "/",
-            query: {
-              // redirect: router.currentRoute.fullPath
-            },
+            path: RouterName.SignIn,
           });
           break;
         case 403:
@@ -39,17 +52,16 @@ axios.interceptors.response.use(
           // Redirect to the login page and pass the fullPath of the page you want to view, after logging in successfully, it will redirect to the desired page
           setTimeout(() => {
             router.replace({
-              path: "/",
-              query: {
-                // redirect: router.currentRoute.fullPath
-              },
+              path: RouterName.Error403,
             });
           }, 1000);
           break;
 
         // 404: Request does not exist
         case 404:
-          // console.log('The requested page has flown to Mars')
+          router.replace({
+            path: RouterName.Error404,
+          });
           break;
       }
       return Promise.reject(error.response);

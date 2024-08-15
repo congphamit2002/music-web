@@ -40,6 +40,7 @@ import mixin from "@/mixins/mixin";
 import YinLoginLogo from "@/components/layouts/YinLoginLogo.vue";
 import { HttpManager } from "@/api";
 import { NavName, RouterName, SignInRules } from "@/enums";
+import store from "@/store";
 
 export default defineComponent({
   components: {
@@ -74,11 +75,12 @@ export default defineComponent({
           type: result.type,
         });
 
-        if (result.success) {
-          proxy.$store.commit("setUserId", result.data[0].id);
-          proxy.$store.commit("setUsername", result.data[0].username);
-          proxy.$store.commit("setUserPic", result.data[0].avatar);
-          proxy.$store.commit("setToken", true);
+
+        if (result.code === 200) {
+          store.commit("setUserId", result.data.userId);
+          store.commit("setUsername", result.data.userName);
+          store.commit("setUserPic", result.data.avatar);
+          store.commit("setToken", result.data.accessToken);
           changeIndex(NavName.Home);
           routerManager(RouterName.Home, { path: RouterName.Home });
         }

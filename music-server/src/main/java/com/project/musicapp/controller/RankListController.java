@@ -4,6 +4,7 @@ import com.project.musicapp.common.Response;
 import com.project.musicapp.model.request.RankListRequest;
 import com.project.musicapp.service.RankListService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

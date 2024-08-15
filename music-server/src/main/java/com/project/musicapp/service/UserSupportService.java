@@ -9,6 +9,6 @@ import com.project.musicapp.model.request.UserSupportRequest;
 public interface UserSupportService extends IService<UserSupport> {
     Response likeComment(UserSupportRequest userSupportRequest);
     Response unlikeComment(UserSupportRequest userSupportRequest);
-    Response existLikeComment(UserSupportRequest userSupportRequest);
+    Response existLikeComment(int commentId, int userId);
     UserSupport getUserSupportByUserIdAndCommentId(int userId, int commentId);
 }
