@@ -54,9 +54,9 @@ public class UserSupportServiceImpl extends ServiceImpl<UserSupportMapper, UserS
     }
 
     @Override
-    public Response existLikeComment(UserSupportRequest userSupportRequest) {
+    public Response existLikeComment(int commentId, int userId) {
         try {
-            UserSupport userSupport = this.getUserSupportByUserIdAndCommentId(userSupportRequest.getUserId(), userSupportRequest.getCommentId());
+            UserSupport userSupport = this.getUserSupportByUserIdAndCommentId(userId, commentId);
             if (userSupport == null) {
                 return Response.success(null, false);
             }

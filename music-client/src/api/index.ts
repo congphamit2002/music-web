@@ -10,7 +10,7 @@ const HttpManager = {
   // =======================> User API Completed
   // Login
   signIn: ({ username, password }) =>
-    post(`user/login/status`, { username, password }),
+    post(`api/v1/login`, { username, password }),
   signInByemail: ({ email, password }) =>
     post(`user/email/status`, { email, password }),
 
@@ -103,7 +103,7 @@ const HttpManager = {
     deletes(`collections?userId=${userId}&&songId=${songId}`),
 
   isCollection: ({ userId, type, songId }) =>
-    post(`collections/status?userId=${userId}&&songId=${songId}`),
+    get(`collections/status?userId=${userId}&&songId=${songId}`),
 
   // =======================> Rating API Completed
   // Submit rating
@@ -115,18 +115,18 @@ const HttpManager = {
 
   // Get user's ratings for playlists
   getUserRank: (userId, songListId) =>
-    get(`/rankList/user?userId=${userId}&songListId=${songListId}`),
+    get(`/rankLists/user?userId=${userId}&songListId=${songListId}`),
 
   // =======================> Comment API Completed
   // Add comment
   setComment: ({ userId, content, songId, songListId, nowType }) =>
-    post(`comment/add`, { userId, content, songId, songListId, nowType }),
+    post(`comments`, { userId, content, songId, songListId, nowType }),
 
   // Delete comment
-  deleteComment: (id) => get(`comment/delete?id=${id}`),
+  deleteComment: (id) => deletes(`comments/${id}`),
 
   // Like a comment
-  setSupport: ({ id, up }) => post(`comment/like`, { id, up }),
+  setSupport: ({ id, up }) => post(`comments/${id}/like`, { id, up }),
 
   // Return all comments
   getAllComment: (type, id) => {

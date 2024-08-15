@@ -19,12 +19,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        List<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
         User user = userService.getUserByUsername(username);
                 if(user == null) {
                     throw new UsernameNotFoundException("User not found with username or email: " + username);
                 }
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole()));
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities );
     }
 }

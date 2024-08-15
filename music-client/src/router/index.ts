@@ -5,6 +5,14 @@ const routes: Array<RouteRecordRaw> = [
     redirect: "/404",
   },
   {
+    path: "/404",
+    component: () => import("@/views/error/404.vue"),
+  },
+  {
+    path: "/403",
+    component: () => import("@/views/error/403.vue"),
+  },
+  {
     path: "/",
     name: "yin-container",
     component: () => import("@/views/YinContainer.vue"),

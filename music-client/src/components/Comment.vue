@@ -38,11 +38,15 @@
         @click="setSupport(item.id, item.up, userId)"
       >
         <div><yin-icon :icon="iconList.Support"></yin-icon> {{ item.up }}</div>
-        <el-icon
-          v-if="item.userId === userId"
-          @click="deleteComment(item.id, index)"
-          ><Delete
-        /></el-icon>
+      </div>
+      <div class="comment-ctr">
+        <div>
+          <el-icon
+            v-if="item.userId === userId"
+            @click="deleteComment(item.id, index)"
+            ><Delete
+          /></el-icon>
+        </div>
       </div>
     </li>
   </ul>
@@ -105,11 +109,11 @@ async function getComment(id) {
     commentList.value = result.data;
     for (let index = 0; index < commentList.value.length; index++) {
       // Fetch the nickname and avatar of the comment's user
-      const resultUser = (await HttpManager.getUserOfId(
-        commentList.value[index].userId
-      )) as ResponseBody;
-      commentList.value[index].avatar = resultUser.data[0].avatar;
-      commentList.value[index].username = resultUser.data[0].username;
+      // const resultUser = (await HttpManager.getUserOfId(
+      //   commentList.value[index].userId
+      // )) as ResponseBody;
+      // commentList.value[index].avatar = resultUser.data.avatar;
+      // commentList.value[index].username = resultUser.data.username;
     }
   } catch (error) {
     console.error("[Failed to fetch all comments] ===>", error);
@@ -153,6 +157,7 @@ async function submitComment() {
 
 // Delete a comment
 async function deleteComment(id, index) {
+  console.log("In delete comment ");
   const result = (await HttpManager.deleteComment(id)) as ResponseBody;
   (proxy as any).$message({
     message: result.message,

@@ -22,6 +22,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     public Response addComment(CommentRequest commentRequest) {
         Comment comment = new Comment();
         BeanUtils.copyProperties(commentRequest, comment);
+        comment.setType(commentRequest.getNowType());
         try {
             if (commentMapper.insert(comment) > 0) {
                 return Response.success("Insert comment success");

@@ -18,7 +18,7 @@ public class CommentRequest {
 
     private String content;
 
-    private Byte type;
+    private Byte nowType;
 
     private Byte up;
 }

@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("userSupports")
+@RequestMapping("/userSupports")
 public class UserSupportController {
     private final UserSupportService userSupportService;
 
     @GetMapping("/exist")
-    public Response existLikeComment(@RequestBody UserSupportRequest userSupportRequest) {
-        return userSupportService.existLikeComment(userSupportRequest);
+    public Response existLikeComment(@RequestParam int commentId, @RequestParam int userId) {
+        return userSupportService.existLikeComment(commentId, userId);
     }
 
     @PostMapping("/like")
