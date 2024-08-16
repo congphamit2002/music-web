@@ -11,6 +11,7 @@ import com.project.musicapp.mapper.UserMapper;
 import com.project.musicapp.model.domain.User;
 import com.project.musicapp.model.request.LoginRequest;
 import com.project.musicapp.model.request.UserRequest;
+import com.project.musicapp.service.MinioService;
 import com.project.musicapp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -22,8 +23,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.charset.StandardCharsets;
 
@@ -31,6 +34,7 @@ import java.nio.charset.StandardCharsets;
 @RequiredArgsConstructor
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     private final UserMapper userMapper;
+    private final MinioService minioService;
 
     /*
             TODO: Set password to bcrypt
@@ -87,6 +91,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+    public Response updateUserAvatar(int id, MultipartFile file) {
+        try {
+            User user = this.getUserById(id);
+            user.setAvator(Constants.UPLOAD_AVATAR_IMAGE + file.getOriginalFilename());
+            if("File uploaded successfully!".equals(minioService.uploadAvatar(file)) && userMapper.updateById(user) > 0) {
+                return Response.success("Update avatar successfully", user.getAvator());
+            } else {
+                return Response.error("Update avatar failed");
+            }
+        } catch (DataNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (RuntimeException e) {
+            return Response.error(e.getMessage());
+        }
+    }
+
+    @Override
     public boolean existUser(String username) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);
@@ -122,5 +143,30 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);
         return userMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public Response updatePassword(int id, UserRequest userRequest) {
+        try {
+            User user = this.getUserById(id);
+            if (!this.validateOldPassword(userRequest.getOldPassword(), user.getPassword())) {
+                return Response.warning("Old password does not match");
+            }
+            user.setPassword(BCrypt.hashpw(userRequest.getPassword(), BCrypt.gensalt(12)));
+            if (userMapper.updateById(user) > 0) {
+                return Response.success("Update password success");
+            } else {
+                return Response.error("Update failed");
+            }
+        } catch (DataNotFoundException e) {
+            return Response.notFound(e.getMessage());
+        } catch (RuntimeException e) {
+            return Response.error(e.getMessage());
+        }
+    }
+
+    @Override
+    public Boolean validateOldPassword(String passwordRequest, String oldPassword) {
+        return BCrypt.checkpw(passwordRequest, oldPassword);
     }
 }

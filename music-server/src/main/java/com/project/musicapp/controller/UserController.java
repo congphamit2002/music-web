@@ -5,6 +5,7 @@ import com.project.musicapp.model.request.UserRequest;
 import com.project.musicapp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/users")
@@ -29,5 +30,15 @@ public class UserController {
     @PutMapping("/{id}")
     public Response updateUser(@PathVariable Integer id, @RequestBody UserRequest userRequest) {
         return userService.updateUser(id, userRequest);
+    }
+
+    @PostMapping("/{id}/avatar")
+    public Response updateUserAvatar(@PathVariable int id, @RequestParam("file") MultipartFile avatarFile) {
+        return userService.updateUserAvatar(id, avatarFile);
+    }
+
+    @PutMapping("/{id}/password")
+    public Response updateUserPassword(@RequestBody UserRequest userRequest, @PathVariable int id) {
+        return userService.updatePassword(id, userRequest);
     }
 }

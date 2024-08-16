@@ -1,4 +1,4 @@
-import { getBaseURL, get, post, deletes } from "./request";
+import { getBaseURL, get, put, post, deletes } from "./request";
 
 const HttpManager = {
   // Get image information
@@ -14,6 +14,7 @@ const HttpManager = {
   signInByemail: ({ email, password }) =>
     post(`user/email/status`, { email, password }),
 
+  logOut: () => post(`/api/v1/logout`),
   // Register
   SignUp: ({
     username,
@@ -50,7 +51,7 @@ const HttpManager = {
     introduction,
     location,
   }) =>
-    post(`user/update`, {
+    put(`users/${id}`, {
       id,
       username,
       sex,
@@ -61,13 +62,13 @@ const HttpManager = {
       location,
     }),
   updateUserPassword: ({ id, username, oldPassword, password }) =>
-    post(`user/updatePassword`, { id, username, oldPassword, password }),
+    put(`users/${id}/password`, { id, username, oldPassword, password }),
 
   // Return user by ID
-  getUserOfId: (id) => get(`user/detail?id=${id}`),
+  getUserOfId: (id) => get(`users/${id}`),
 
   // Update user avatar
-  uploadUrl: (userId) => `${getBaseURL()}/user/avatar/update?id=${userId}`,
+  uploadAvatarUrl: (userId) => `${getBaseURL()}/users/${userId}/avatar`,
 
   // =======================> Playlist API Completed
   // Get all playlists
@@ -93,11 +94,11 @@ const HttpManager = {
 
   // =======================> Collection API Completed
   // Return the collection list for a specific user ID
-  getCollectionOfUser: (userId) => get(`collections/detail?userId=${userId}`),
+  getCollectionOfUser: (userId) => get(`collections?userId=${userId}`),
 
   // Add a song to the collection; type: 0 for songs, 1 for playlists
   setCollection: ({ userId, type, songId }) =>
-    post(`collections/add`, { userId, type, songId }),
+    post(`collections`, { userId, type, songId }),
 
   deleteCollection: (userId, songId) =>
     deletes(`collections?userId=${userId}&&songId=${songId}`),
