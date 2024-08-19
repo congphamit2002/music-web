@@ -32,14 +32,14 @@ const routes: Array<RouteRecordRaw> = [
         name: "sign-up",
         component: () => import("@/views/SignUp.vue"),
       },
-      // {
-      //   path: "/personal",
-      //   name: "personal",
-      //   meta: {
-      //     requireAuth: true,
-      //   },
-      //   component: () => import("@/views/personal/Personal.vue"),
-      // },
+      {
+        path: "/personal",
+        name: "personal",
+        meta: {
+          requireAuth: true,
+        },
+        component: () => import("@/views/personal/Personal.vue"),
+      },
       {
         path: "/song-sheet",
         name: "song-sheet",
@@ -70,39 +70,34 @@ const routes: Array<RouteRecordRaw> = [
         name: "search",
         component: () => import("@/views/search/Search.vue"),
       },
-      // {
-      //   path: "/personal-data",
-      //   name: "personal-data",
-      //   component: () => import("@/views/setting/PersonalData.vue"),
-      // },
+      {
+        path: "/personal-data",
+        name: "personal-data",
+        component: () => import("@/views/setting/PersonalData.vue"),
+      },
       // {
       //   path: "/FPassword",
       //   name: "FPassword",
       //   component: () => import("@/views/FPassword.vue"),
       // },
-      // {
-      //   path: "/loginByemail",
-      //   name: "loginByemail",
-      //   component: () => import("@/views/loginByemail.vue"),
-      // },
-      // {
-      //   path: "/setting",
-      //   name: "setting",
-      //   meta: {
-      //     requireAuth: true,
-      //   },
-      //   component: () => import("@/views/setting/Setting.vue"),
-      //   children: [
-      //     {
-      //       path: "/setting/PersonalData",
-      //       name: "personalData",
-      //       meta: {
-      //         requireAuth: true,
-      //       },
-      //       component: () => import("@/views/setting/PersonalData.vue"),
-      //     },
-      //   ],
-      // },
+      {
+        path: "/setting",
+        name: "setting",
+        meta: {
+          requireAuth: true,
+        },
+        component: () => import("@/views/setting/Setting.vue"),
+        children: [
+          {
+            path: "/setting/PersonalData",
+            name: "personalData",
+            meta: {
+              requireAuth: true,
+            },
+            component: () => import("@/views/setting/PersonalData.vue"),
+          },
+        ],
+      },
     ],
   },
 ];

@@ -28,7 +28,6 @@
         <el-button @click="handleSignUp">Sign Up</el-button>
         <el-button type="primary" @click="handleLoginIn">Login</el-button>
         <el-button @click="handleForgotPassword">Forgot Password</el-button>
-        <el-button @click="handleEmail">Email Login</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -99,16 +98,11 @@ export default defineComponent({
       });
     }
 
-    function handleEmail() {
-      routerManager(RouterName.loginByEmail, { path: RouterName.loginByEmail });
-    }
-
     return {
       registerForm,
       SignInRules,
       handleLoginIn,
       handleForgotPassword,
-      handleEmail,
       handleSignUp,
     };
   },

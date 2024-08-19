@@ -16,5 +16,4 @@ export const enum RouterName {
   Error404 = "/404",
   SignOut = "0",
   ForgotPassword = "/FPassword",
-  loginByEmail = "/loginByEmail",
 }
