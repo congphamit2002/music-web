@@ -26,7 +26,7 @@ const HttpManager = {
     introduction,
     location,
   }) =>
-    post(`user/add`, {
+    post(`users`, {
       username,
       password,
       sex,
@@ -35,6 +35,7 @@ const HttpManager = {
       birth,
       introduction,
       location,
+      role: "ROLE_USER",
     }),
 
   // Delete user
@@ -82,8 +83,7 @@ const HttpManager = {
     get(`songLists/title?title=${keywords}`),
 
   // Return songs from a playlist by playlist ID
-  getListSongOfSongId: (songListId) =>
-    get(`listSongs/songList/${songListId}`),
+  getListSongOfSongId: (songListId) => get(`listSongs/songList/${songListId}`),
 
   // =======================> Singer API Completed
   // Return all singers
@@ -149,8 +149,7 @@ const HttpManager = {
 
   // Return songs by singer name
   // TODO: CHECK
-  getSongOfSingerName: (keywords) =>
-    get(`songs/name?name=${keywords}`),
+  getSongOfSingerName: (keywords) => get(`songs/name?name=${keywords}`),
 
   // Download music
   downloadMusic: (url) => get(url, { responseType: "blob" }),

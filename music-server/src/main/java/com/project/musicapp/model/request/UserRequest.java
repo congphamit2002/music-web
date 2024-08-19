@@ -29,4 +29,6 @@ public class UserRequest {
     private Date createTime;
 
     private Date updateTime;
+
+    private String role;
 }

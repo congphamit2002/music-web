@@ -40,7 +40,7 @@ public class CustomLogoutHandler implements LogoutHandler {
             try {
                 response.setContentType("application/json");
                 response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().write("{\"status\":\"200\",\"message\":\"Log out successfully\"}");
+                response.getWriter().write("{\"code\":\"200\",\"message\":\"Log out successfully\"}");
             } catch (IOException e) {
                 e.printStackTrace(); // Handle the exception appropriately
             }
