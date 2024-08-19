@@ -35,6 +35,7 @@ import java.nio.charset.StandardCharsets;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     private final UserMapper userMapper;
     private final MinioService minioService;
+    private final JwtProvider jwtProvider;
 
     /*
             TODO: Set password to bcrypt
@@ -44,10 +45,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (this.existUser(userRequest.getUsername())) {
             return Response.warning("Username already exists");
         }
-        System.out.println("Request " + userRequest.toString());
         User user = new User();
         BeanUtils.copyProperties(userRequest, user);
-        String password = DigestUtils.md5DigestAsHex((Constants.SALT + userRequest.getPassword()).getBytes(StandardCharsets.UTF_8));
+        String password = BCrypt.hashpw(userRequest.getPassword(), BCrypt.gensalt(12));
         user.setPassword(password);
         if ("".equals(userRequest.getEmail())) {
             user.setEmail(null);
