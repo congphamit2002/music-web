@@ -35,7 +35,6 @@ public class JwtAuthFiler extends OncePerRequestFilter {
         if(jwtProvider.validationToken(token)) {
             //token hợp lệ
             String jsonData = jwtProvider.decodeToken(token);
-            System.out.println("Check token " + jsonData);
             Gson gson = new Gson();
             //User user = gson.fromJson(jsonData, User.class);
             User userDetail = (User) userDetailsServiceImpl.loadUserByUsername(jsonData);

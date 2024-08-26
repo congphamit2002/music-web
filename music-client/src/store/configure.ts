@@ -1,6 +1,6 @@
 export default {
   state: {
-    token: false, // User login status
+    token: "", // User login status
     showAside: false, // Whether to display the sidebar
     searchWord: "", // Search keyword
     activeNavName: "", // Name of the active navigation

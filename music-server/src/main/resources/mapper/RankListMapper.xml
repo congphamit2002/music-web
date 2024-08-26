@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.project.musicapp.model.domain.RankList">
     <result column="id" property="id" jdbcType="BIGINT" />
     <result column="songListId" property="songListId" jdbcType="BIGINT" />
-    <result column="consumerId" property="userId" jdbcType="BIGINT" />
+    <result column="userId" property="userId" jdbcType="BIGINT" />
     <result column="score" property="score" jdbcType="INTEGER" />
   </resultMap>
 
@@ -15,7 +15,7 @@
   <select id="selectUserRank" resultType="java.lang.Integer" parameterType="com.project.musicapp.model.domain.RankList">
     select score
     from rank_list
-    where consumer_id = #{consumer_id, jdbcType=BIGINT} and song_list_id = #{song_list_id, jdbcType=BIGINT}
+    where user_id = #{user_id, jdbcType=BIGINT} and song_list_id = #{song_list_id, jdbcType=BIGINT}
   </select>
 
 </mapper>

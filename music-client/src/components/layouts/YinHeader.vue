@@ -99,11 +99,19 @@ export default defineComponent({
       }
     }
 
-    function goMenuList(path) {
+    async function goMenuList(path) {
       if (path == RouterName.SignOut) {
-        proxy.$store.commit("setToken", false);
-        changeIndex(NavName.Home);
-        routerManager(RouterName.Home, { path: RouterName.Home });
+        const result = (await HttpManager.logOut()) as ResponseBody;
+        if (result.code === "200") {
+          proxy.$store.commit("setToken", null);
+          changeIndex(NavName.Home);
+          routerManager(RouterName.Home, { path: RouterName.Home });
+        } else {
+          (proxy as any).$message({
+            message: result.message,
+            type: "error",
+          });
+        }
       } else {
         routerManager(path, { path });
       }
